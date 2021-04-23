@@ -23,7 +23,7 @@
 #' @importFrom utils read.table write.table
 #'
 #' @examples
-#' The example code will be added later...
+#' # The example code will be added later...
 #'
 #' @export
 

@@ -23,7 +23,7 @@ Authors@R: c(
     person("Niclas", "Kolm", role = "dtc"),
     person("Alexander", "Kotrschal", role = "dtc"))
 Maintainer: Sergey Morozov <sergey.morozov@helsinki.fi>
-License: GPL-3
+License: GPL-3 + file LICENSE
 SystemRequirements: Display resolution >= 1280x800; RAM >= 4GB
 Depends: R (>= 3.0.0)
 Imports: chron, lattice, mclust, rMR, respirometry
