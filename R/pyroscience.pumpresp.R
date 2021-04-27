@@ -41,7 +41,8 @@ pyroscience.pumpresp <- function(pyroscience.file,
   if (n.chamber == 1){
     pyroscience.data <- read.table(pyroscience.file, sep = "\t", skip=14, header=F, strip.white=T)
     pyroscience.data <- subset(pyroscience.data, select=c(V1, V2, V9, V5))
-    names(pyroscience.data)<-c("Date", "Time", "Temp.1", "Ox.1")
+    colnames(pyroscience.data)<-c("Date", "Time", "Temp.1", "Ox.1")
+    for(i in 3:ncol(pyroscience.data)){pyroscience.data[,i] = as.numeric(gsub(',','.', pyroscience.data[,i]))}
     pyroscience.data$Date.Time <- paste(pyroscience.data$Date, pyroscience.data$Time, sep="/")
     pyroscience.data[pyroscience.data == "---"] <- NA
     pyroscience.data <- pyroscience.data[,c(5,3,4)]
@@ -51,6 +52,7 @@ pyroscience.pumpresp <- function(pyroscience.file,
     pyroscience.data <- read.table(pyroscience.file, sep = "\t", skip=16, header=F, strip.white=T)
     pyroscience.data <- subset(pyroscience.data, select=c(V1, V2, V9, V5, V10, V6))
     colnames(pyroscience.data)<-c("Date", "Time", "Temp.1", "Ox.1", "Temp.2", "Ox.2")
+    for(i in 3:ncol(pyroscience.data)){pyroscience.data[,i] = as.numeric(gsub(',','.', pyroscience.data[,i]))}
     pyroscience.data[pyroscience.data == "---"] <- NA
     pyroscience.data <- pyroscience.data[,c(7,3,4,5,6)]
     }
@@ -59,6 +61,7 @@ pyroscience.pumpresp <- function(pyroscience.file,
     pyroscience.data <- read.table(pyroscience.file, sep = "\t", skip=18, header=F, strip.white=T)
     pyroscience.data <- subset(pyroscience.data, select=c(V1, V2, V9, V5, V10, V6, V11, V7))
     colnames(pyroscience.data)<-c("Date", "Time", "Temp.1", "Ox.1", "Temp.2", "Ox.2", "Temp.3", "Ox.3")
+    for(i in 3:ncol(pyroscience.data)){pyroscience.data[,i] = as.numeric(gsub(',','.', pyroscience.data[,i]))}
     pyroscience.data$Date.Time <- paste(pyroscience.data$Date, pyroscience.data$Time, sep="/")
     pyroscience.data[pyroscience.data == "---"] <- NA
     pyroscience.data <- pyroscience.data[,c(9,3,4,5,6,7,8)]
@@ -68,6 +71,7 @@ pyroscience.pumpresp <- function(pyroscience.file,
     pyroscience.data <- read.table(pyroscience.file, sep = "\t", skip=20, header=F, strip.white=T)
     pyroscience.data <- subset(pyroscience.data, select=c(V1, V2, V9, V5, V10, V6, V11, V7, V12, V8))
     colnames(pyroscience.data)<-c("Date", "Time", "Temp.1", "Ox.1", "Temp.2", "Ox.2", "Temp.3", "Ox.3", "Temp.4", "Ox.4")
+    for(i in 3:ncol(pyroscience.data)){pyroscience.data[,i] = as.numeric(gsub(',','.', pyroscience.data[,i]))}
     pyroscience.data$Date.Time <- paste(pyroscience.data$Date, pyroscience.data$Time, sep="/")
     pyroscience.data[pyroscience.data == "---"] <- NA
     pyroscience.data <- pyroscience.data[,c(11,3,4,5,6,7,8,9,10)]

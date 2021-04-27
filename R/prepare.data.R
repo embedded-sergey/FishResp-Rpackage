@@ -1,6 +1,6 @@
 #' Prepare Raw Respirometry Data
 #'
-#' This function is used for preparation of raw data before the actual respirometry analysis. As namely, the function will create measurement points for each second (the required FishResp format) if the time interval between two measurement points is more than one second. In addition, low and high thresold for both dissolved oxygen and water temperature might be applied here. The measurement points beyond the threshold(s) will be transformed to NA.
+#' This function is used for preparation of raw data in the FishResp format before the actual respirometry analysis. As namely, the function will create measurement points for each second (the required FishResp format) if the time interval between two measurement points is more than one second. In addition, low and high thresold for both dissolved oxygen and water temperature might be applied here. The measurement points beyond the threshold(s) will be transformed to NA.
 #'
 #' @usage
 #' prepare.data(import.file, export.file,
@@ -35,6 +35,7 @@ prepare.data <- function(import.file, export.file,
   MR.data <- read.table(import.file, sep = "\t", header=T,
                         check.names=FALSE, strip.white=T)
   colnames(MR.data)[1]  <- "Date.Time"
+  for(i in 3:ncol(MR.data)){MR.data[,i] = as.numeric(gsub(',','.', MR.data[,i]))}
 
   # indexing the first  measurement point and the last one
   start <- MR.data$Date.Time[1]
