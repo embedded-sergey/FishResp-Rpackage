@@ -23,8 +23,14 @@
 #' @importFrom utils read.table write.table
 #'
 #' @examples
-#' # The example code will be added later...
+#' amphipod.path = system.file("extdata/amphipod/amphipod.txt",
+#'                  package = "FishResp")
 #'
+#' prepare.data(import.file = amphipod.path,
+#'              export.file = "amphipod_corrected.txt",
+#'              date.format = "DMY",
+#'              DO.low = 0.5,
+#'              DO.high = 12)
 #' @export
 
 prepare.data <- function(import.file, export.file,
