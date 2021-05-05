@@ -7,16 +7,13 @@
 #'                      pumpresp.file,
 #'                      fishresp.file,
 #'                      n.chamber = c(1,2,3,4),
-#'                      date.format = c("DMY", "MDY", "YMD"),
-#'                      wait.phase = NA, measure.phase = NA)
+#'                      date.format = c("DMY", "MDY", "YMD"))
 #'
 #' @param pyroscience.file  the name of a file which contains raw data obtained from the 'Pyro Oxygen Logger' software (\href{https://www.pyro-science.com}{PyroScience})
-#' @param pumpresp.file  the name of a file which contains logger data obtained from the pump conroller \href{www.aquaresp.com}{PumpResp}
+#' @param pumpresp.file  the name of a file which contains logger data obtained from the pump conroller \href{https://fishresp.org/pumpresp}{PumpResp}
 #' @param fishresp.file  the name of an exported file containing raw data in the 'FishResp' format
 #' @param n.chamber  integer: the number of chambers used in an experiment (including empty ones)
 #' @param date.format  string: date format (DMY, MDY or YMD) used in raw data obtained from the 'Pyro Oxygen Logger' software
-#' @param wait.phase  integer: duration of the wait phase (in seconds), see the 'AquaResp' summary file (row #5)
-#' @param measure.phase  integer: duration of the measure phase (in seconds), see the 'AquaResp' summary file (row #6)
 #'
 #' @return The function exports a file containing raw data in the 'FishResp' format
 #' @importFrom chron chron
@@ -24,7 +21,17 @@
 #'
 #' @examples
 #'
-#' #Add from Jenni's experiment
+#' pyroscience.path = system.file("extdata/salmon/salmon_pyroscience.txt",
+#'                  package = "FishResp")
+#'
+#' pumpresp.path = system.file("extdata/salmon/salmon_pumpresp.txt",
+#'                  package = "FishResp")
+#'
+#' pyroscience.pumpresp(pyroscience.path,
+#'                      pumpresp.path,
+#'                      "fishresp.txt",
+#'                      n.chamber = 4,
+#'                      date.format = "DMY")
 #'
 #' @export
 
@@ -32,8 +39,7 @@ pyroscience.pumpresp <- function(pyroscience.file,
                                  pumpresp.file,
                                  fishresp.file,
                                  n.chamber = c(1,2,3,4),
-                                 date.format = c("DMY", "MDY", "YMD"),
-                                 wait.phase = NA, measure.phase = NA){
+                                 date.format = c("DMY", "MDY", "YMD")){
 
   # Loading PyroScience data
   V1 <- V2 <- V3 <- V4 <- V5 <- V6 <- V7 <- V8 <- V9 <- V10 <- V11 <- V12 <- NULL

@@ -8,23 +8,18 @@ pyroscience.pumpresp(pyroscience.file,
                      pumpresp.file,
                      fishresp.file,
                      n.chamber = c(1,2,3,4),
-                     date.format = c("DMY", "MDY", "YMD"),
-                     wait.phase = NA, measure.phase = NA)
+                     date.format = c("DMY", "MDY", "YMD"))
 }
 \arguments{
 \item{pyroscience.file}{the name of a file which contains raw data obtained from the 'Pyro Oxygen Logger' software (\href{https://www.pyro-science.com}{PyroScience})}
 
-\item{pumpresp.file}{the name of a file which contains logger data obtained from the pump conroller \href{www.aquaresp.com}{PumpResp}}
+\item{pumpresp.file}{the name of a file which contains logger data obtained from the pump conroller \href{https://fishresp.org/pumpresp}{PumpResp}}
 
 \item{fishresp.file}{the name of an exported file containing raw data in the 'FishResp' format}
 
 \item{n.chamber}{integer: the number of chambers used in an experiment (including empty ones)}
 
 \item{date.format}{string: date format (DMY, MDY or YMD) used in raw data obtained from the 'Pyro Oxygen Logger' software}
-
-\item{wait.phase}{integer: duration of the wait phase (in seconds), see the 'AquaResp' summary file (row #5)}
-
-\item{measure.phase}{integer: duration of the measure phase (in seconds), see the 'AquaResp' summary file (row #6)}
 }
 \value{
 The function exports a file containing raw data in the 'FishResp' format
@@ -34,6 +29,16 @@ The function is used to convert raw data from 'Pyro Oxygen Logger' (\href{https:
 }
 \examples{
 
-#Add from Jenni's experiment
+pyroscience.path = system.file("extdata/salmon/salmon_pyroscience.txt",
+                 package = "FishResp")
+
+pumpresp.path = system.file("extdata/salmon/salmon_pumpresp.txt",
+                 package = "FishResp")
+
+pyroscience.pumpresp(pyroscience.path,
+                     pumpresp.path,
+                     "fishresp.txt",
+                     n.chamber = 4,
+                     date.format = "DMY")
 
 }
