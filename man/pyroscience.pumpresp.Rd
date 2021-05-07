@@ -11,9 +11,9 @@ pyroscience.pumpresp(pyroscience.file,
                      date.format = c("DMY", "MDY", "YMD"))
 }
 \arguments{
-\item{pyroscience.file}{the name of a file which contains raw data obtained from the 'Pyro Oxygen Logger' software (\href{https://www.pyro-science.com}{PyroScience})}
+\item{pyroscience.file}{the name of a file which contains raw data obtained from the 'Pyro Oxygen Logger' software (\href{https://www.pyroscience.com/}{PyroScience})}
 
-\item{pumpresp.file}{the name of a file which contains logger data obtained from the pump conroller \href{https://fishresp.org/pumpresp}{PumpResp}}
+\item{pumpresp.file}{the name of a file which contains logger data obtained from the pump conroller \href{https://fishresp.org/pumpresp/}{PumpResp}}
 
 \item{fishresp.file}{the name of an exported file containing raw data in the 'FishResp' format}
 
@@ -25,10 +25,10 @@ pyroscience.pumpresp(pyroscience.file,
 The function exports a file containing raw data in the 'FishResp' format
 }
 \description{
-The function is used to convert raw data from 'Pyro Oxygen Logger' (\href{https://www.pyro-science.com}{PyroScience}) and a logger file of the pump controller \href{https://fishresp.org/weblizar-service/pumpresp/}{PumpResp} to the 'FishResp' format. This function should be applied before usage of the functions \code{\link{import.test}} and \code{\link{import.meas}}. The output is a file containing raw respirometry data in the 'FishResp' format (see Details in \code{\link{import.test}} to read more information about the 'FishResp' format)
+The function is used to convert raw data from 'Pyro Oxygen Logger' (\href{https://www.pyroscience.com/}{PyroScience}) and a logger file of the pump controller \href{https://fishresp.org/pumpresp/}{PumpResp} to the 'FishResp' format. This function should be applied before usage of the functions \code{\link{import.test}} and \code{\link{import.meas}}. The output is a file containing raw respirometry data in the 'FishResp' format (see Details in \code{\link{import.test}} to read more information about the 'FishResp' format)
 }
 \examples{
-
+\dontrun{
 pyroscience.path = system.file("extdata/salmon/salmon_pyroscience.txt",
                  package = "FishResp")
 
@@ -40,5 +40,5 @@ pyroscience.pumpresp(pyroscience.path,
                      "fishresp.txt",
                      n.chamber = 4,
                      date.format = "DMY")
-
+}
 }

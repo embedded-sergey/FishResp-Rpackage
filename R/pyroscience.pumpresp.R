@@ -1,6 +1,6 @@
 #' Convert Respirometry Data from PyroScience and the pump controller PumpResp to the FishResp Format
 #'
-#' The function is used to convert raw data from 'Pyro Oxygen Logger' (\href{https://www.pyro-science.com}{PyroScience}) and a logger file of the pump controller \href{https://fishresp.org/weblizar-service/pumpresp/}{PumpResp} to the 'FishResp' format. This function should be applied before usage of the functions \code{\link{import.test}} and \code{\link{import.meas}}. The output is a file containing raw respirometry data in the 'FishResp' format (see Details in \code{\link{import.test}} to read more information about the 'FishResp' format)
+#' The function is used to convert raw data from 'Pyro Oxygen Logger' (\href{https://www.pyroscience.com/}{PyroScience}) and a logger file of the pump controller \href{https://fishresp.org/pumpresp/}{PumpResp} to the 'FishResp' format. This function should be applied before usage of the functions \code{\link{import.test}} and \code{\link{import.meas}}. The output is a file containing raw respirometry data in the 'FishResp' format (see Details in \code{\link{import.test}} to read more information about the 'FishResp' format)
 #'
 #' @usage
 #' pyroscience.pumpresp(pyroscience.file,
@@ -9,8 +9,8 @@
 #'                      n.chamber = c(1,2,3,4),
 #'                      date.format = c("DMY", "MDY", "YMD"))
 #'
-#' @param pyroscience.file  the name of a file which contains raw data obtained from the 'Pyro Oxygen Logger' software (\href{https://www.pyro-science.com}{PyroScience})
-#' @param pumpresp.file  the name of a file which contains logger data obtained from the pump conroller \href{https://fishresp.org/pumpresp}{PumpResp}
+#' @param pyroscience.file  the name of a file which contains raw data obtained from the 'Pyro Oxygen Logger' software (\href{https://www.pyroscience.com/}{PyroScience})
+#' @param pumpresp.file  the name of a file which contains logger data obtained from the pump conroller \href{https://fishresp.org/pumpresp/}{PumpResp}
 #' @param fishresp.file  the name of an exported file containing raw data in the 'FishResp' format
 #' @param n.chamber  integer: the number of chambers used in an experiment (including empty ones)
 #' @param date.format  string: date format (DMY, MDY or YMD) used in raw data obtained from the 'Pyro Oxygen Logger' software
@@ -20,7 +20,7 @@
 #' @importFrom utils read.table write.table
 #'
 #' @examples
-#'
+#' \dontrun{
 #' pyroscience.path = system.file("extdata/salmon/salmon_pyroscience.txt",
 #'                  package = "FishResp")
 #'
@@ -32,7 +32,7 @@
 #'                      "fishresp.txt",
 #'                      n.chamber = 4,
 #'                      date.format = "DMY")
-#'
+#' }
 #' @export
 
 pyroscience.pumpresp <- function(pyroscience.file,

@@ -31,6 +31,7 @@ The function exports a data file with one second interval between measurement po
 This function is used for preparation of raw data in the FishResp format before the actual respirometry analysis. As namely, the function will create measurement points for each second (the required FishResp format) if the time interval between two measurement points is more than one second. In addition, low and high thresold for both dissolved oxygen and water temperature might be applied here. The measurement points beyond the threshold(s) will be transformed to NA (be careful if use the 'parallel' method for background respiration correction as it might transform DO or Temp to NA as well).
 }
 \examples{
+\dontrun{
 amphipod.path = system.file("extdata/amphipod/amphipod.txt",
                  package = "FishResp")
 
@@ -39,4 +40,5 @@ prepare.data(import.file = amphipod.path,
              date.format = "DMY",
              DO.low = 0.5,
              DO.high = 12)
+}
 }

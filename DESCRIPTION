@@ -13,8 +13,8 @@ Description: Calculates metabolic rate of fish and other aquatic organisms measu
              'Q-box Aqua' ('QubitSystems').
 URL: https://fishresp.org
 Authors@R: c(
-    person("Sergey", "Morozov", role = c("aut", "cre"), email = "sergey.morozov@helsinki.fi") ,
-    person("Scott", "McCairns", role = c("aut", "ths"), email = "scott.mccairns@inra.fr"),
+    person("Sergey", "Morozov", role = c("aut", "cre"), email = "sergey.morozov@helsinki.fi"),
+    person("Scott", "McCairns", role = c("aut", "ths")),
 	  person("Federico", "Calboli", role = "ctb"),
     person("Juha", "Merila", role = "ths"),
     person("Jenni", "Prokkola", role = "dtc"),
@@ -25,11 +25,11 @@ Authors@R: c(
     person("Alexander", "Kotrschal", role = "dtc"),
     person("Erik", "Gill", role = "dtc"))
 Maintainer: Sergey Morozov <sergey.morozov@helsinki.fi>
-License: GPL-3 + file LICENSE
+License: GPL-3
 SystemRequirements: Display resolution >= 1280x800; RAM >= 4GB
 Depends: R (>= 3.0.0)
 Imports: chron, lattice, mclust, rMR, respirometry
-LazyData: FALSE
+LazyData: TRUE
 RoxygenNote: 7.1.1
 Encoding: UTF-8
 NeedsCompilation: no
