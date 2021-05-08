@@ -10,13 +10,14 @@ Description: Calculates metabolic rate of fish and other aquatic organisms measu
              controller 'PumpResp' and the DO meter 'SensResp' (open-source hardware by FishResp).
              Raw respirometry data can be also imported from 'AquaResp' (free software), 'AutoResp'
              ('LoligoSystems'), 'OxyView' ('PreSens'), 'Pyro Oxygen Logger' ('PyroScience') and
-             'Q-box Aqua' ('QubitSystems').
+             'Q-box Aqua' ('QubitSystems'). More information about the R package 'FishResp'is
+             available in the publication by Morozov et al. (2019) <doi:10.1093/conphys/coz003>.
 URL: https://fishresp.org
 Authors@R: c(
     person("Sergey", "Morozov", role = c("aut", "cre"), email = "sergey.morozov@helsinki.fi"),
     person("Scott", "McCairns", role = c("aut", "ths")),
-	  person("Federico", "Calboli", role = "ctb"),
     person("Juha", "Merila", role = "ths"),
+    person("Federico", "Calboli", role = "ctb"),
     person("Jenni", "Prokkola", role = "dtc"),
     person("Stephen", "White", role = "dtc"),
     person("Daniel", "Montgomery", role = "dtc"),
@@ -33,4 +34,4 @@ LazyData: TRUE
 RoxygenNote: 7.1.1
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2021-05-06 03:12:01 UTC; greatsage
+Packaged: 2021-05-09 03:12:01 UTC; greatsage
