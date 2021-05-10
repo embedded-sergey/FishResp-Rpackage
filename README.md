@@ -23,7 +23,7 @@ Alternativelly, download the latest release from GitHub and install using the fo
 If you are not familiar with the R language, please check out the graphical implementation of the R package: [FishRespGUI](https://fishresp.org/gui-application/).
 
 ## Notes
-To cite FishResp please refer to: "Morozov, S., McCairns, R.J.S., Merila, J. (2019) FishResp: R package and GUI application for analysis of aquatic respirometry data. Conserv Physiol 7(1): coz003; doi:10.1093/conphys/coz003".
+To cite FishResp please refer to: "Morozov, S., McCairns, R.J.S., Merila, J. (2019) FishResp: R package and GUI application for analysis of aquatic respirometry data. Conserv Physiol 7(1): coz003; <https://doi.org/10.1093/conphys/coz003>".
 
 To see the list of changes made in various versions of the R package, open the file ['NEWS.md'](https://github.com/embedded-sergey/FishResp-Rpackage/blob/main/NEWS.md).
 
