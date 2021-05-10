@@ -23,4 +23,4 @@ Thanks to Erik Gill and Jenni Prokkola for data contributions.
 
 # FishResp v1.0.3 [LTS]
 This version was described in the academic publication:
-Morozov et al. (2019) <doi:10.1093/conphys/coz003>
+Morozov et al. (2019) <https://doi.org/10.1093/conphys/coz003>
