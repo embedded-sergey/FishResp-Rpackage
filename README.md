@@ -11,7 +11,7 @@ The R package 'FishResp' is designed to calculate metabolic rate of aquatic orga
 * AquaResp (free software)
 * Q-box Aqua (by _QubitSystems_)
 
-The idea behind FishResp, an analysis pipeline and case studies are described in the [academic publication](https://doi.org/10.1093/conphys/coz003) by Morozov et al. (2019). Technical information about R functions and demo data can be found in [Reference Manual](https://cran.r-project.org/web/packages/FishResp/FishResp.pdf). Brief descriptions of the R package 'FishResp' and other open-source tools for aquatic respirometry are located at the website [fishresp.org](https://fishresp.org).
+The idea behind FishResp, an analysis pipeline and case studies are described in the [academic publication](https://doi.org/10.1093/conphys/coz003) by Morozov et al. (2019). Technical information about R functions and demo data can be found in [Reference Manual](https://cran.r-project.org/package=FishResp). Brief descriptions of the R package 'FishResp' and other open-source tools for aquatic respirometry are located at the website [fishresp.org](https://fishresp.org).
 
 ## Installation
 
