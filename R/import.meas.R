@@ -357,7 +357,7 @@ import.meas <- function(file, info.data,
   PM.4 <- grepl("pm", MR.data.all[,1], fixed=TRUE)
   dts <- NULL
 
-  if(PM.1 || PM.2 || PM.3 || PM.4 == TRUE){
+  if(any(PM.1) || any(PM.2) || any(PM.3) || any(PM.4) == TRUE){
 
     if(any(date.format == "DMY")){
       if(logger == "QboxAqua"){
