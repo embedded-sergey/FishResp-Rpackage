@@ -126,89 +126,89 @@ import.meas <- function(file, info.data,
       MR.data.all<-subset(MR.data.all, select=c(V1, V2, V6, V7))
       names(MR.data.all)<-c("Date.Time", "Phase", "Temp.1", "Ox.1")
       for(i in 3:ncol(MR.data.all)){MR.data.all[,i] = as.numeric(gsub(',','.', MR.data.all[,i]))}
-      aaa <- max(MR.data.all$Ox.1, na.rm = TRUE)
-      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- aaa}
+      avoid.all.NA <- max(MR.data.all$Ox.1, na.rm = TRUE)
+      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- avoid.all.NA}
     }
     else if (n.chamber == 2){
       MR.data.all<-subset(MR.data.all, select=c(V1, V2, V6, V7, V9, V10))
       names(MR.data.all)<-c("Date.Time", "Phase", "Temp.1", "Ox.1", "Temp.2", "Ox.2")
       for(i in 3:ncol(MR.data.all)){MR.data.all[,i] = as.numeric(gsub(',','.', MR.data.all[,i]))}
-      aaa <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2), na.rm = TRUE)
-      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- aaa}
+      avoid.all.NA <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2), na.rm = TRUE)
+      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- avoid.all.NA}
     }
     else if (n.chamber == 3){
       MR.data.all<-subset(MR.data.all, select=c(V1, V2, V6, V7, V9, V10, V12, V13))
       names(MR.data.all)<-c("Date.Time", "Phase", "Temp.1", "Ox.1", "Temp.2", "Ox.2", "Temp.3", "Ox.3")
       for(i in 3:ncol(MR.data.all)){MR.data.all[,i] = as.numeric(gsub(',','.', MR.data.all[,i]))}
-      aaa <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3), na.rm = TRUE)
-      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- aaa}
+      avoid.all.NA <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3), na.rm = TRUE)
+      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- avoid.all.NA}
     }
     else if (n.chamber == 4){
       MR.data.all<-subset(MR.data.all, select=c(V1, V2, V6, V7, V9, V10, V12, V13, V15, V16))
       names(MR.data.all)<-c("Date.Time", "Phase", "Temp.1", "Ox.1", "Temp.2", "Ox.2", "Temp.3", "Ox.3", "Temp.4", "Ox.4")
       for(i in 3:ncol(MR.data.all)){MR.data.all[,i] = as.numeric(gsub(',','.', MR.data.all[,i]))}
-      aaa <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3, MR.data.all$Ox.4), na.rm = TRUE)
-      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.4))){MR.data.all$Ox.4[is.na(MR.data.all$Ox.4)] <- aaa}
+      avoid.all.NA <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3, MR.data.all$Ox.4), na.rm = TRUE)
+      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.4))){MR.data.all$Ox.4[is.na(MR.data.all$Ox.4)] <- avoid.all.NA}
     }
     else if (n.chamber == 5){
       MR.data.all<-subset(MR.data.all, select=c(V1, V2, V6, V7, V9, V10, V12, V13, V15, V16, V18, V19))
       names(MR.data.all)<-c("Date.Time", "Phase", "Temp.1", "Ox.1", "Temp.2", "Ox.2", "Temp.3", "Ox.3", "Temp.4", "Ox.4", "Temp.5", "Ox.5")
       for(i in 3:ncol(MR.data.all)){MR.data.all[,i] = as.numeric(gsub(',','.', MR.data.all[,i]))}
-      aaa <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3, MR.data.all$Ox.4,
+      avoid.all.NA <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3, MR.data.all$Ox.4,
                    MR.data.all$Ox.5), na.rm = TRUE)
-      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.4))){MR.data.all$Ox.4[is.na(MR.data.all$Ox.4)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.5))){MR.data.all$Ox.5[is.na(MR.data.all$Ox.5)] <- aaa}
+      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.4))){MR.data.all$Ox.4[is.na(MR.data.all$Ox.4)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.5))){MR.data.all$Ox.5[is.na(MR.data.all$Ox.5)] <- avoid.all.NA}
     }
     else if (n.chamber == 6){
       MR.data.all<-subset(MR.data.all, select=c(V1, V2, V6, V7, V9, V10, V12, V13, V15, V16, V18, V19, V21, V22))
       names(MR.data.all)<-c("Date.Time", "Phase", "Temp.1", "Ox.1", "Temp.2", "Ox.2", "Temp.3", "Ox.3", "Temp.4", "Ox.4", "Temp.5", "Ox.5", "Temp.6", "Ox.6")
       for(i in 3:ncol(MR.data.all)){MR.data.all[,i] = as.numeric(gsub(',','.', MR.data.all[,i]))}
-      aaa <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3, MR.data.all$Ox.4,
+      avoid.all.NA <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3, MR.data.all$Ox.4,
                    MR.data.all$Ox.5, MR.data.all$Ox.6), na.rm = TRUE)
-      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.4))){MR.data.all$Ox.4[is.na(MR.data.all$Ox.4)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.5))){MR.data.all$Ox.5[is.na(MR.data.all$Ox.5)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.6))){MR.data.all$Ox.6[is.na(MR.data.all$Ox.6)] <- aaa}
+      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.4))){MR.data.all$Ox.4[is.na(MR.data.all$Ox.4)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.5))){MR.data.all$Ox.5[is.na(MR.data.all$Ox.5)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.6))){MR.data.all$Ox.6[is.na(MR.data.all$Ox.6)] <- avoid.all.NA}
     }
     else if (n.chamber == 7){
       MR.data.all<-subset(MR.data.all, select=c(V1, V2, V6, V7, V9, V10, V12, V13, V15, V16, V18, V19, V21, V22, V24, V25))
       names(MR.data.all)<-c("Date.Time", "Phase", "Temp.1", "Ox.1", "Temp.2", "Ox.2", "Temp.3", "Ox.3", "Temp.4", "Ox.4", "Temp.5", "Ox.5", "Temp.6", "Ox.6", "Temp.7", "Ox.7")
       for(i in 3:ncol(MR.data.all)){MR.data.all[,i] = as.numeric(gsub(',','.', MR.data.all[,i]))}
-      aaa <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3, MR.data.all$Ox.4,
+      avoid.all.NA <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3, MR.data.all$Ox.4,
                    MR.data.all$Ox.5, MR.data.all$Ox.6, MR.data.all$Ox.7), na.rm = TRUE)
-      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.4))){MR.data.all$Ox.4[is.na(MR.data.all$Ox.4)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.5))){MR.data.all$Ox.5[is.na(MR.data.all$Ox.5)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.6))){MR.data.all$Ox.6[is.na(MR.data.all$Ox.6)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.7))){MR.data.all$Ox.7[is.na(MR.data.all$Ox.7)] <- aaa}
+      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.4))){MR.data.all$Ox.4[is.na(MR.data.all$Ox.4)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.5))){MR.data.all$Ox.5[is.na(MR.data.all$Ox.5)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.6))){MR.data.all$Ox.6[is.na(MR.data.all$Ox.6)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.7))){MR.data.all$Ox.7[is.na(MR.data.all$Ox.7)] <- avoid.all.NA}
     }
     else if (n.chamber == 8){
       MR.data.all<-subset(MR.data.all, select=c(V1, V2, V6, V7, V9, V10, V12, V13, V15, V16, V18, V19, V21, V22, V24, V25, V27, V28))
       names(MR.data.all)<-c("Date.Time", "Phase", "Temp.1", "Ox.1", "Temp.2", "Ox.2", "Temp.3", "Ox.3", "Temp.4", "Ox.4", "Temp.5", "Ox.5", "Temp.6", "Ox.6", "Temp.7", "Ox.7", "Temp.8", "Ox.8")
       for(i in 3:ncol(MR.data.all)){MR.data.all[,i] = as.numeric(gsub(',','.', MR.data.all[,i]))}
-      aaa <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3, MR.data.all$Ox.4,
+      avoid.all.NA <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3, MR.data.all$Ox.4,
                    MR.data.all$Ox.5, MR.data.all$Ox.6, MR.data.all$Ox.7, MR.data.all$Ox.8), na.rm = TRUE)
-      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.4))){MR.data.all$Ox.4[is.na(MR.data.all$Ox.4)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.5))){MR.data.all$Ox.5[is.na(MR.data.all$Ox.5)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.6))){MR.data.all$Ox.6[is.na(MR.data.all$Ox.6)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.7))){MR.data.all$Ox.7[is.na(MR.data.all$Ox.7)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.8))){MR.data.all$Ox.8[is.na(MR.data.all$Ox.8)] <- aaa}
+      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.4))){MR.data.all$Ox.4[is.na(MR.data.all$Ox.4)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.5))){MR.data.all$Ox.5[is.na(MR.data.all$Ox.5)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.6))){MR.data.all$Ox.6[is.na(MR.data.all$Ox.6)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.7))){MR.data.all$Ox.7[is.na(MR.data.all$Ox.7)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.8))){MR.data.all$Ox.8[is.na(MR.data.all$Ox.8)] <- avoid.all.NA}
     }
     else{
       print("Please, choose the number of chambers between 1 and 8")
@@ -223,89 +223,89 @@ import.meas <- function(file, info.data,
       MR.data.all<-subset(MR.data.all, select=c(V1, V2, V3, V4))
       names(MR.data.all)<-c("Date.Time", "Phase", "Temp.1", "Ox.1")
       for(i in 3:ncol(MR.data.all)){MR.data.all[,i] = as.numeric(gsub(',','.', MR.data.all[,i]))}
-      aaa <- max(MR.data.all$Ox.1, na.rm = TRUE)
-      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- aaa}
+      avoid.all.NA <- max(MR.data.all$Ox.1, na.rm = TRUE)
+      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- avoid.all.NA}
     }
     else if (n.chamber == 2){
       MR.data.all<-subset(MR.data.all, select=c(V1, V2, V3, V4, V5, V6))
       names(MR.data.all)<-c("Date.Time", "Phase", "Temp.1", "Ox.1", "Temp.2", "Ox.2")
       for(i in 3:ncol(MR.data.all)){MR.data.all[,i] = as.numeric(gsub(',','.', MR.data.all[,i]))}
-      aaa <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2), na.rm = TRUE)
-      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- aaa}
+      avoid.all.NA <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2), na.rm = TRUE)
+      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- avoid.all.NA}
     }
     else if (n.chamber == 3){
       MR.data.all<-subset(MR.data.all, select=c(V1, V2, V3, V4, V5, V6, V7, V8))
       names(MR.data.all)<-c("Date.Time", "Phase", "Temp.1", "Ox.1", "Temp.2", "Ox.2", "Temp.3", "Ox.3")
       for(i in 3:ncol(MR.data.all)){MR.data.all[,i] = as.numeric(gsub(',','.', MR.data.all[,i]))}
-      aaa <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3), na.rm = TRUE)
-      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- aaa}
+      avoid.all.NA <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3), na.rm = TRUE)
+      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- avoid.all.NA}
     }
     else if (n.chamber == 4){
       MR.data.all<-subset(MR.data.all, select=c(V1, V2, V3, V4, V5, V6, V7, V8, V9, V10))
       names(MR.data.all)<-c("Date.Time", "Phase", "Temp.1", "Ox.1", "Temp.2", "Ox.2", "Temp.3", "Ox.3", "Temp.4", "Ox.4")
       for(i in 3:ncol(MR.data.all)){MR.data.all[,i] = as.numeric(gsub(',','.', MR.data.all[,i]))}
-      aaa <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3, MR.data.all$Ox.4), na.rm = TRUE)
-      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.4))){MR.data.all$Ox.4[is.na(MR.data.all$Ox.4)] <- aaa}
+      avoid.all.NA <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3, MR.data.all$Ox.4), na.rm = TRUE)
+      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.4))){MR.data.all$Ox.4[is.na(MR.data.all$Ox.4)] <- avoid.all.NA}
     }
     else if (n.chamber == 5){
       MR.data.all<-subset(MR.data.all, select=c(V1, V2, V3, V4, V5, V6, V7, V8, V9, V10, V11, V12))
       names(MR.data.all)<-c("Date.Time", "Phase", "Temp.1", "Ox.1", "Temp.2", "Ox.2", "Temp.3", "Ox.3", "Temp.4", "Ox.4", "Temp.5", "Ox.5")
       for(i in 3:ncol(MR.data.all)){MR.data.all[,i] = as.numeric(gsub(',','.', MR.data.all[,i]))}
-      aaa <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3, MR.data.all$Ox.4,
+      avoid.all.NA <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3, MR.data.all$Ox.4,
                    MR.data.all$Ox.5), na.rm = TRUE)
-      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.4))){MR.data.all$Ox.4[is.na(MR.data.all$Ox.4)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.5))){MR.data.all$Ox.5[is.na(MR.data.all$Ox.5)] <- aaa}
+      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.4))){MR.data.all$Ox.4[is.na(MR.data.all$Ox.4)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.5))){MR.data.all$Ox.5[is.na(MR.data.all$Ox.5)] <- avoid.all.NA}
     }
     else if (n.chamber == 6){
       MR.data.all<-subset(MR.data.all, select=c(V1, V2, V3, V4, V5, V6, V7, V8, V9, V10, V11, V12, V13, V14))
       names(MR.data.all)<-c("Date.Time", "Phase", "Temp.1", "Ox.1", "Temp.2", "Ox.2", "Temp.3", "Ox.3", "Temp.4", "Ox.4", "Temp.5", "Ox.5", "Temp.6", "Ox.6")
       for(i in 3:ncol(MR.data.all)){MR.data.all[,i] = as.numeric(gsub(',','.', MR.data.all[,i]))}
-      aaa <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3, MR.data.all$Ox.4,
+      avoid.all.NA <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3, MR.data.all$Ox.4,
                    MR.data.all$Ox.5, MR.data.all$Ox.6), na.rm = TRUE)
-      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.4))){MR.data.all$Ox.4[is.na(MR.data.all$Ox.4)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.5))){MR.data.all$Ox.5[is.na(MR.data.all$Ox.5)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.6))){MR.data.all$Ox.6[is.na(MR.data.all$Ox.6)] <- aaa}
+      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.4))){MR.data.all$Ox.4[is.na(MR.data.all$Ox.4)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.5))){MR.data.all$Ox.5[is.na(MR.data.all$Ox.5)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.6))){MR.data.all$Ox.6[is.na(MR.data.all$Ox.6)] <- avoid.all.NA}
     }
     else if (n.chamber == 7){
       MR.data.all<-subset(MR.data.all, select=c(V1, V2, V3, V4, V5, V6, V7, V8, V9, V10, V11, V12, V13, V14, V15, V16))
       names(MR.data.all)<-c("Date.Time", "Phase", "Temp.1", "Ox.1", "Temp.2", "Ox.2", "Temp.3", "Ox.3", "Temp.4", "Ox.4", "Temp.5", "Ox.5", "Temp.6", "Ox.6", "Temp.7", "Ox.7")
       for(i in 3:ncol(MR.data.all)){MR.data.all[,i] = as.numeric(gsub(',','.', MR.data.all[,i]))}
-      aaa <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3, MR.data.all$Ox.4,
+      avoid.all.NA <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3, MR.data.all$Ox.4,
                    MR.data.all$Ox.5, MR.data.all$Ox.6, MR.data.all$Ox.7), na.rm = TRUE)
-      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.4))){MR.data.all$Ox.4[is.na(MR.data.all$Ox.4)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.5))){MR.data.all$Ox.5[is.na(MR.data.all$Ox.5)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.6))){MR.data.all$Ox.6[is.na(MR.data.all$Ox.6)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.7))){MR.data.all$Ox.7[is.na(MR.data.all$Ox.7)] <- aaa}
+      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.4))){MR.data.all$Ox.4[is.na(MR.data.all$Ox.4)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.5))){MR.data.all$Ox.5[is.na(MR.data.all$Ox.5)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.6))){MR.data.all$Ox.6[is.na(MR.data.all$Ox.6)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.7))){MR.data.all$Ox.7[is.na(MR.data.all$Ox.7)] <- avoid.all.NA}
     }
     else if (n.chamber == 8){
       MR.data.all<-subset(MR.data.all, select=c(V1, V2, V3, V4, V5, V6, V7, V8, V9, V10, V11, V12, V13, V14, V15, V16, V17, V18))
       names(MR.data.all)<-c("Date.Time", "Phase", "Temp.1", "Ox.1", "Temp.2", "Ox.2", "Temp.3", "Ox.3", "Temp.4", "Ox.4", "Temp.5", "Ox.5", "Temp.6", "Ox.6", "Temp.7", "Ox.7", "Temp.8", "Ox.8")
       for(i in 3:ncol(MR.data.all)){MR.data.all[,i] = as.numeric(gsub(',','.', MR.data.all[,i]))}
-      aaa <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3, MR.data.all$Ox.4,
+      avoid.all.NA <- max(c(MR.data.all$Ox.1, MR.data.all$Ox.2, MR.data.all$Ox.3, MR.data.all$Ox.4,
                    MR.data.all$Ox.5, MR.data.all$Ox.6, MR.data.all$Ox.7, MR.data.all$Ox.8), na.rm = TRUE)
-      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.4))){MR.data.all$Ox.4[is.na(MR.data.all$Ox.4)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.5))){MR.data.all$Ox.5[is.na(MR.data.all$Ox.5)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.6))){MR.data.all$Ox.6[is.na(MR.data.all$Ox.6)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.7))){MR.data.all$Ox.7[is.na(MR.data.all$Ox.7)] <- aaa}
-      if(all(is.na(MR.data.all$Ox.8))){MR.data.all$Ox.8[is.na(MR.data.all$Ox.8)] <- aaa}
+      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.2))){MR.data.all$Ox.2[is.na(MR.data.all$Ox.2)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.3))){MR.data.all$Ox.3[is.na(MR.data.all$Ox.3)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.4))){MR.data.all$Ox.4[is.na(MR.data.all$Ox.4)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.5))){MR.data.all$Ox.5[is.na(MR.data.all$Ox.5)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.6))){MR.data.all$Ox.6[is.na(MR.data.all$Ox.6)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.7))){MR.data.all$Ox.7[is.na(MR.data.all$Ox.7)] <- avoid.all.NA}
+      if(all(is.na(MR.data.all$Ox.8))){MR.data.all$Ox.8[is.na(MR.data.all$Ox.8)] <- avoid.all.NA}
     }
     else{
       print("Please, choose the number of chambers between 1 and 8")
@@ -320,8 +320,8 @@ import.meas <- function(file, info.data,
       MR.data.all<-subset(MR.data.all, select=c(V1, V9, V4, ncol(MR.data.all)))
       names(MR.data.all)<-c("Date.Time", "Phase", "Temp.1", "Ox.1")
       for(i in 3:ncol(MR.data.all)){MR.data.all[,i] = as.numeric(gsub(',','.', MR.data.all[,i]))}
-      aaa <- max(MR.data.all$Ox.1, na.rm = TRUE)
-      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- aaa}
+      avoid.all.NA <- max(MR.data.all$Ox.1, na.rm = TRUE)
+      if(all(is.na(MR.data.all$Ox.1))){MR.data.all$Ox.1[is.na(MR.data.all$Ox.1)] <- avoid.all.NA}
 
       ### Indexing measurement phases for QboxAqua
       MR.data.all$Phase[MR.data.all$Phase == "1"] <- "F"
@@ -347,7 +347,7 @@ import.meas <- function(file, info.data,
     print("Please, choose the format of your data: AutoResp, FishResp or QboxAqua")
   }
 
-  rm(aaa)
+  rm(avoid.all.NA)
 
   #--------------------------------------------------------------------------------------------------------------------------------------------------#
   # Formatting Date & Time Entries
@@ -503,7 +503,7 @@ import.meas <- function(file, info.data,
   MR.data.all$Phase<-factor(MR.data.all$Phase)
 
   # here is a quick lesson in how to create an ordered factor
-  # note the odering of levels for the factor 'Phase' in the current dataframe
+  # note the ordering of levels for the factor 'Phase' in the current dataframe
   levels(MR.data.all$Phase)
 
   # now creating the re-ordered factor
