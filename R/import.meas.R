@@ -11,6 +11,7 @@
 #'             stop.measure = "23:59:59",
 #'             set.date.time = NA,
 #'             meas.to.wait = 0,
+#'             meas.to.flush = 0,
 #'             plot.temperature = TRUE,
 #'             plot.oxygen = TRUE)
 #'
@@ -28,6 +29,7 @@
 #' @param stop.measure  chron: time when metabolic rate measurements are finished
 #' @param set.date.time  chron: this parameter is turned off by default and needed to be specified only if raw data were recorded by 'Q-box Aqua' logger software. Specifically, input the date and time when .cmbl file was built in one of the following formats: "dd/mm/yyyy/hh:mm:ss", "mm/dd/yyyy/hh:mm:ss", or "yyyy/mm/dd/hh:mm:ss" (in accourdance to the chosen date.format parameter).
 #' @param meas.to.wait  integer: the number of first rows for each measurement phase (M) which should be reassigned to the wait phase (W). The parameter should be used when the wait phase (W) is absent (e.g. in 'Q-box Aqua' logger software) or not long enough to eliminate non-linear change in DO concentration over time from the measurement phase (M) after shutting off water supply from the ambient water source.
+#' @param meas.to.flush  integer: the number of last rows for each measurement phase (M) which should be reassigned to the flush phase (F). The parameter should be used to eliminate non-linear change in DO concentration over time from the measurement phase (M) after untimely shutting on water supply from the ambient water source.
 #' @param plot.temperature  logical: if TRUE then the graph of raw temperature data is plotted
 #' @param plot.oxygen  logical: if TRUE then the graph of raw oxygen data is plotted
 #'
@@ -107,6 +109,7 @@ import.meas <- function(file, info.data,
                         stop.measure = "23:59:59",
                         set.date.time = NA,
                         meas.to.wait = 0,
+                        meas.to.flush = 0,
                         plot.temperature = TRUE,
                         plot.oxygen = TRUE){
 
@@ -340,7 +343,6 @@ import.meas <- function(file, info.data,
     }
   }
 
-
   else{
     print("Please, choose the format of your data: AutoResp, FishResp or QboxAqua")
   }
@@ -518,8 +520,9 @@ import.meas <- function(file, info.data,
   # Removing the final measurement Phase (tail error)
   #--------------------------------------------------------------------------------------------------------------------------------------------------#
   y <- length(which(MR.data.all$Phase==head(levels(MR.data.all$Phase),1), T))
+  y <- y - 10 #some buffer in case of unexpected lags
   z <- length(which(MR.data.all$Phase==tail(levels(MR.data.all$Phase),1), T))
-  if (y != z){
+  if (z < y){
     MR.data.all<-subset(MR.data.all, Phase!=tail(levels(MR.data.all$Phase),1))
   }
   MR.data.all$Phase<-factor(MR.data.all$Phase)
@@ -530,16 +533,33 @@ import.meas <- function(file, info.data,
     ifelse(MR.data.all$Phase==a, x <- a, i<-i+1)
   }
 
-  # cut off first n raws from 'M' phase
+  # Measurement phase seconds (M) converted to waiting (W) or flushing (F)
   if(meas.to.wait != 0){
     idx <- unlist(tapply(1:nrow(MR.data.all), MR.data.all$Phase, tail, -(meas.to.wait)), use.names=FALSE)
     MR.data.all <- MR.data.all[idx, ]
   }else{
     }
+
+  if(meas.to.flush != 0){
+    idx <- unlist(tapply(1:nrow(MR.data.all), MR.data.all$Phase, head, -(meas.to.flush)), use.names=FALSE)
+    MR.data.all <- MR.data.all[idx, ]
+  }else{
+    }
+    
   row.names(MR.data.all) <- 1:nrow(MR.data.all)
 
-  MR.data.all$Time<-rep(1:1:length(subset(MR.data.all, Phase == x)$Ox.1), length(levels(MR.data.all$Phase)))
-  rm(x)
+  # Append time index for each measurement phase
+  k = 1
+  time.vector = NULL
+  for(k in 1:length(levels(MR.data.all$Phase))){
+    a <- paste("M", k, sep = "")
+    time.vector <- append(time.vector, rep(1:1:length(subset(MR.data.all, Phase == a)$Ox.1)))
+    k <- k+1
+  }
+
+  MR.data.all$Time<-time.vector
+  rm(k)
+  rm(time.vector)
 
   #--------------------------------------------------------------------------------------------------------------------------------------------------#
   # Restricting Dataset to Mearusements Taken in the Dark
