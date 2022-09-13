@@ -634,17 +634,10 @@ import.meas <- function(file, info.data,
   temp.df$End.Meas<-times(temp.df$End.Meas)
   temp.df$Total.Phases<-nlevels(temp.df$Phase)
 
-
-  ### One or two days? (one day error)
-  temp.df1<-subset(temp.df, Start.Meas>times(start.measure) & Start.Meas<times(stop.measure))
-  if (length(temp.df1$Date) != 0){
-    temp.df <- temp.df1
-  }
-  else
-  {
-    temp.df2<- subset(temp.df, Start.Meas>times(start.measure) | Start.Meas<times(stop.measure))
-    temp.df <- temp.df2
-  }
+  # cutting data based on start and stop measure filters
+  start.date.time <- temp.df$Date.Time[na.omit(which(temp.df$Real.Time >= times("start.measure")))][1]
+  stop.date.time <- rev(temp.df$Date.Time[na.omit(which(temp.df$Real.Time <= times("stop.measure")))])[1]
+  temp.df <- subset(temp.df, (Date.Time>start.date.time & Date.Time<stop.date.time))
 
   temp.df$Phase<-factor(temp.df$Phase)
 
