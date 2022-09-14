@@ -504,7 +504,7 @@ import.meas <- function(file, info.data,
 
   # here is a quick lesson in how to create an ordered factor
   # note the ordering of levels for the factor 'Phase' in the current dataframe
-  levels(MR.data.all$Phase)
+  # RUN: levels(MR.data.all$Phase)
 
   # now creating the re-ordered factor
   z <- MR.data.all$Phase
@@ -514,7 +514,7 @@ import.meas <- function(file, info.data,
   MR.data.all$Phase<-x
   rm(x)
   # note the new class of 'Phase' and the new ordering
-  levels(MR.data.all$Phase)
+  # RUN: levels(MR.data.all$Phase)
 
   #--------------------------------------------------------------------------------------------------------------------------------------------------#
   # Removing the final measurement Phase (tail error)
@@ -526,12 +526,7 @@ import.meas <- function(file, info.data,
     MR.data.all<-subset(MR.data.all, Phase!=tail(levels(MR.data.all$Phase),1))
   }
   MR.data.all$Phase<-factor(MR.data.all$Phase)
-
-  # Identification of time period (M1 error)
-  for(i in 1:10){
-    a <- paste("M", i, sep = "")
-    ifelse(MR.data.all$Phase==a, x <- a, i<-i+1)
-  }
+  row.names(MR.data.all) <- 1:nrow(MR.data.all)
 
   # Measurement phase seconds (M) converted to waiting (W) or flushing (F)
   if(meas.to.wait != 0){
@@ -547,18 +542,21 @@ import.meas <- function(file, info.data,
     }
     
   row.names(MR.data.all) <- 1:nrow(MR.data.all)
-
-  # Append time index for each measurement phase
-  k = 1
+  
+  #----------------------------------------------#
+  # Append time index for each measurement phase #
+  #----------------------------------------------#
+  i = 1
   time.vector = NULL
-  for(k in 1:length(levels(MR.data.all$Phase))){
-    a <- paste("M", k, sep = "")
+
+  for(i in as.numeric(gsub("[M]","",levels(MR.data.all$Phase)))){
+    a <- paste("M", i, sep = "")
     time.vector <- append(time.vector, rep(1:1:length(subset(MR.data.all, Phase == a)$Ox.1)))
-    k <- k+1
+    i <- i + 1
   }
 
   MR.data.all$Time<-time.vector
-  rm(k)
+  rm(i)
   rm(time.vector)
 
   #--------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -617,24 +615,28 @@ import.meas <- function(file, info.data,
 
   }
 
-  for(i in 1:length(x))
-  {	x.df<-subset(MR.data.all, Phase==x[i])
-  x.start<-rep(as.character(x.df$Real.Time[1]), dim(x.df)[1])
-  x.end<-rep(as.character(tail(x.df$Real.Time, 1)), dim(x.df)[1])
-  x.df$Start.Meas<-x.start
-  x.df$End.Meas<-x.end
-  temp.df<-rbind(temp.df, x.df) }
+  for(i in 1:length(x)){	
+    x.df<-subset(MR.data.all, Phase==x[i])
+    x.start<-rep(as.character(x.df$Real.Time[1]), dim(x.df)[1])
+    x.end<-rep(as.character(tail(x.df$Real.Time, 1)), dim(x.df)[1])
+    x.df$Start.Meas<-x.start
+    x.df$End.Meas<-x.end
+    temp.df<-rbind(temp.df, x.df)
+    }
 
   rm(x)
   rm(i)
   rm(x.df)
   rm(x.start)
   rm(x.end)
+
   temp.df$Start.Meas<-times(temp.df$Start.Meas)
   temp.df$End.Meas<-times(temp.df$End.Meas)
-  temp.df$Total.Phases<-nlevels(temp.df$Phase)
-
-  # cutting data based on start and stop measure filters
+  temp.df$Total.Phases<-nlevels(temp.df$Phase) ### Why?! CHECK!!!
+  
+  #-------------------------------------------------------------------#
+  # Filtering data based on start.measure and stop.measure thresholds #
+  #-------------------------------------------------------------------#
   start.date.time <- temp.df$Date.Time[na.omit(which(temp.df$Real.Time >= times("start.measure")))][1]
   stop.date.time <- rev(temp.df$Date.Time[na.omit(which(temp.df$Real.Time <= times("stop.measure")))])[1]
   temp.df <- subset(temp.df, (Date.Time>start.date.time & Date.Time<stop.date.time))
