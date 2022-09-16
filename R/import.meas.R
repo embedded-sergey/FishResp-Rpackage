@@ -9,6 +9,8 @@
 #'             date.format = c("DMY", "MDY", "YMD"),
 #'             start.measure = "00:00:00",
 #'             stop.measure = "23:59:59",
+#'             start.measure.date = NA,
+#'             stop.measure.date = NA,
 #'             set.date.time = NA,
 #'             meas.to.wait = 0,
 #'             meas.to.flush = 0,
@@ -27,6 +29,8 @@
 #' @param date.format  string: date format (DMY, MDY or YMD)
 #' @param start.measure  chron: time when metabolic rate measurements are started
 #' @param stop.measure  chron: time when metabolic rate measurements are finished
+#' @param start.measure.date  chron: date when metabolic rate measurements are started
+#' @param stop.measure.date  chron: date when metabolic rate measurements are finished
 #' @param set.date.time  chron: this parameter is turned off by default and needed to be specified only if raw data were recorded by 'Q-box Aqua' logger software. Specifically, input the date and time when .cmbl file was built in one of the following formats: "dd/mm/yyyy/hh:mm:ss", "mm/dd/yyyy/hh:mm:ss", or "yyyy/mm/dd/hh:mm:ss" (in accourdance to the chosen date.format parameter).
 #' @param meas.to.wait  integer: the number of first rows for each measurement phase (M) which should be reassigned to the wait phase (W). The parameter should be used when the wait phase (W) is absent (e.g. in 'Q-box Aqua' logger software) or not long enough to eliminate non-linear change in DO concentration over time from the measurement phase (M) after shutting off water supply from the ambient water source.
 #' @param meas.to.flush  integer: the number of last rows for each measurement phase (M) which should be reassigned to the flush phase (F). The parameter should be used to eliminate non-linear change in DO concentration over time from the measurement phase (M) after untimely shutting on water supply from the ambient water source.
@@ -637,10 +641,51 @@ import.meas <- function(file, info.data,
   #-------------------------------------------------------------------#
   # Filtering data based on start.measure and stop.measure thresholds #
   #-------------------------------------------------------------------#
-  start.date.time <- temp.df$Date.Time[na.omit(which(temp.df$Real.Time >= times("start.measure")))][1]
-  stop.date.time <- rev(temp.df$Date.Time[na.omit(which(temp.df$Real.Time <= times("stop.measure")))])[1]
-  temp.df <- subset(temp.df, (Date.Time>start.date.time & Date.Time<stop.date.time))
+  .
 
+  ### START ###
+  if (is.na(start.measure.date) == TRUE){
+    start.date.time <- temp.df$Date.Time[na.omit(which(temp.df$Real.Time >= times(start.measure)))][1]
+  }
+  else{
+    if(date.format == "DMY"){
+      start.date.v.0 <- strptime(as.character(start.measure.date), "%d/%m/%Y")
+      start.date.v.1 <- dates(strftime(start.date.v.0, "%d/%m/%y"), format="d/m/y")
+    }
+    if(date.format == "MDY"){
+      start.date.v.0 <- strptime(as.character(start.measure.date), "%m/%d/%Y")
+      start.date.v.1 <- dates(strftime(start.date.v.0, "%m/%d/%y"), format="m/d/y")
+    }
+    if(date.format == "YMD"){
+      start.date.v.0 <- strptime(as.character(start.measure.date), "%Y/%m/%d")
+      start.date.v.1 <- dates(strftime(start.date.v.0, "%y/%m/%d"), format="y/m/d")
+    }
+    start.date.v.2 <- chron(dates = start.date.v.1,  format = "yy-m-d")
+    start.date.time <- chron(start.date.v.2, times(start.measure), format = c(dates = "yy-m-d ", times = "h:m:s"))
+  }
+
+  ### STOP ###
+  if (is.na(stop.measure.date) == TRUE){
+    stop.date.time <- rev(temp.df$Date.Time[na.omit(which(temp.df$Real.Time <= times(stop.measure)))])[1]
+  }
+  else{
+    if(date.format == "DMY"){
+      stop.date.v.0 <- strptime(as.character(stop.measure.date), "%d/%m/%Y")
+      stop.date.v.1 <- dates(strftime(stop.date.v.0, "%d/%m/%y"), format="d/m/y")
+    }
+    if(date.format == "MDY"){
+      stop.date.v.0 <- strptime(as.character(stop.measure.date), "%m/%d/%Y")
+      stop.date.v.1 <- dates(strftime(stop.date.v.0, "%m/%d/%y"), format="m/d/y")
+    }
+    if(date.format == "YMD"){
+      stop.date.v.0 <- strptime(as.character(stop.measure.date), "%Y/%m/%d")
+      stop.date.v.1 <- dates(strftime(stop.date.v.0, "%y/%m/%d"), format="y/m/d")
+    }
+    stop.date.v.2 <- chron(dates = stop.date.v.1,  format = "yy-m-d")
+    stop.date.time <- chron(stop.date.v.2, times(stop.measure), format = c(dates = "yy-m-d ", times = "h:m:s"))
+  }
+
+  temp.df <- subset(temp.df, (Date.Time>start.date.time & Date.Time<stop.date.time))
   temp.df$Phase<-factor(temp.df$Phase)
 
   if (plot.temperature == T){
