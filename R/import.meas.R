@@ -105,12 +105,15 @@
 #' }
 #' @export
 
-import.meas <- function(file, info.data,
+import.meas <- function(file, 
+                        info.data,
                         n.chamber = c(1,2,3,4,5,6,7,8),
                         logger = c("AutoResp", "FishResp", "QboxAqua"),
                         date.format = c("DMY", "MDY", "YMD"),
                         start.measure = "00:00:00",
                         stop.measure = "23:59:59",
+                        start.measure.date = NA,
+                        stop.measure.date = NA,
                         set.date.time = NA,
                         meas.to.wait = 0,
                         meas.to.flush = 0,
@@ -641,7 +644,7 @@ import.meas <- function(file, info.data,
   #-------------------------------------------------------------------#
   # Filtering data based on start.measure and stop.measure thresholds #
   #-------------------------------------------------------------------#
-  .
+  
 
   ### START ###
   if (is.na(start.measure.date) == TRUE){
@@ -660,7 +663,7 @@ import.meas <- function(file, info.data,
       start.date.v.0 <- strptime(as.character(start.measure.date), "%Y/%m/%d")
       start.date.v.1 <- dates(strftime(start.date.v.0, "%y/%m/%d"), format="y/m/d")
     }
-    start.date.v.2 <- chron(dates = start.date.v.1,  format = "yy-m-d")
+    start.date.v.2 <- chron(dates. = start.date.v.1,  format = "yy-m-d")
     start.date.time <- chron(start.date.v.2, times(start.measure), format = c(dates = "yy-m-d ", times = "h:m:s"))
   }
 
@@ -681,11 +684,11 @@ import.meas <- function(file, info.data,
       stop.date.v.0 <- strptime(as.character(stop.measure.date), "%Y/%m/%d")
       stop.date.v.1 <- dates(strftime(stop.date.v.0, "%y/%m/%d"), format="y/m/d")
     }
-    stop.date.v.2 <- chron(dates = stop.date.v.1,  format = "yy-m-d")
+    stop.date.v.2 <- chron(dates. = stop.date.v.1,  format = "yy-m-d")
     stop.date.time <- chron(stop.date.v.2, times(stop.measure), format = c(dates = "yy-m-d ", times = "h:m:s"))
   }
 
-  temp.df <- subset(temp.df, (Date.Time>start.date.time & Date.Time<stop.date.time))
+  temp.df <- subset(temp.df, (temp.df$Date.Time>start.date.time & temp.df$Date.Time<stop.date.time))
   temp.df$Phase<-factor(temp.df$Phase)
 
   if (plot.temperature == T){
