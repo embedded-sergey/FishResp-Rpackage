@@ -534,6 +534,7 @@ import.meas <- function(file,
   }
   MR.data.all$Phase<-factor(MR.data.all$Phase)
   row.names(MR.data.all) <- 1:nrow(MR.data.all)
+  rm(x,y,z)
 
   # Measurement phase seconds (M) converted to waiting (W) or flushing (F)
   if(meas.to.wait != 0){
@@ -637,16 +638,13 @@ import.meas <- function(file,
   rm(x.start)
   rm(x.end)
 
-  temp.df$Start.Meas<-times(temp.df$Start.Meas)
-  temp.df$End.Meas<-times(temp.df$End.Meas)
-  temp.df$Total.Phases<-nlevels(temp.df$Phase) ### Why?! CHECK!!!
-  
   #-------------------------------------------------------------------#
   # Filtering data based on start.measure and stop.measure thresholds #
   #-------------------------------------------------------------------#
-  
+  temp.df$Start.Meas<-times(temp.df$Start.Meas)
+  temp.df$End.Meas<-times(temp.df$End.Meas)
 
-  ### START ###
+  # Start point #
   if (is.na(start.measure.date) == TRUE){
     start.date.time <- temp.df$Date.Time[na.omit(which(temp.df$Real.Time >= times(start.measure)))][1]
   }
@@ -667,7 +665,7 @@ import.meas <- function(file,
     start.date.time <- chron(start.date.v.2, times(start.measure), format = c(dates = "yy-m-d ", times = "h:m:s"))
   }
 
-  ### STOP ###
+  # Stop point #
   if (is.na(stop.measure.date) == TRUE){
     stop.date.time <- rev(temp.df$Date.Time[na.omit(which(temp.df$Real.Time <= times(stop.measure)))])[1]
   }
@@ -690,7 +688,36 @@ import.meas <- function(file,
 
   temp.df <- subset(temp.df, (temp.df$Date.Time>start.date.time & temp.df$Date.Time<stop.date.time))
   temp.df$Phase<-factor(temp.df$Phase)
+  
+  #---------------------------------------------------------------------------------#
+  # If the first or/and the last measurement phase is reduced, they will be removed #
+  #---------------------------------------------------------------------------------#
+  
+  # Head error #
+  y <- length(which(temp.df$Phase==head(levels(temp.df$Phase),1), T))
+  y <- y - 10 #some buffer in case of unexpected lags
+  z <- length(which(temp.df$Phase==tail(levels(temp.df$Phase),1), T))
+  if (z < y){
+    temp.df<-subset(temp.df, Phase!=tail(levels(temp.df$Phase),1))
+  }
+  temp.df$Phase<-factor(temp.df$Phase)
+  row.names(temp.df) <- 1:nrow(temp.df)
+  rm(x,y,z)
+  
+  # Tail error #
+  y <- length(which(temp.df$Phase==head(rev(levels(temp.df$Phase),1)), T))
+  y <- y - 10 #some buffer in case of unexpected lags
+  z <- length(which(temp.df$Phase==tail(rev(levels(temp.df$Phase),1)), T))
+  if (z < y){
+    temp.df<-subset(temp.df, Phase!=tail(rev(levels(temp.df$Phase),1)))
+  }
+  temp.df$Phase<-factor(temp.df$Phase)
+  row.names(temp.df) <- 1:nrow(temp.df)
+  rm(x,y,z)
 
+  temp.df$Total.Phases<-nlevels(temp.df$Phase) ### Why?! CHECK!!!
+
+  ### PLOTTING DATA ###
   if (plot.temperature == T){
     if(n.chamber == 1){
       par(mfrow=c(1,1), ask = T)
