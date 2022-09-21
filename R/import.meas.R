@@ -508,35 +508,19 @@ import.meas <- function(file,
   MR.data.all$Phase.Type<-NULL
   row.names(MR.data.all)<-NULL
   MR.data.all$Phase<-factor(MR.data.all$Phase)
-
-  # here is a quick lesson in how to create an ordered factor
-  # note the ordering of levels for the factor 'Phase' in the current dataframe
-  # RUN: levels(MR.data.all$Phase)
-
   # now creating the re-ordered factor
   z <- MR.data.all$Phase
   z <- gsub("[M]","",z)
   z <- as.numeric(z)
   x <- ordered(MR.data.all$Phase, levels=paste(rep("M",length(levels(MR.data.all$Phase))), head(z, n=1):tail(z, n=1), sep=""))
   MR.data.all$Phase<-x
-  rm(x)
-  # note the new class of 'Phase' and the new ordering
-  # RUN: levels(MR.data.all$Phase)
-
-  #--------------------------------------------------------------------------------------------------------------------------------------------------#
-  # Removing the final measurement Phase (tail error)
-  #--------------------------------------------------------------------------------------------------------------------------------------------------#
-  y <- length(which(MR.data.all$Phase==head(levels(MR.data.all$Phase),1), T))
-  y <- y - 10 #some buffer in case of unexpected lags
-  z <- length(which(MR.data.all$Phase==tail(levels(MR.data.all$Phase),1), T))
-  if (z < y){
-    MR.data.all<-subset(MR.data.all, Phase!=tail(levels(MR.data.all$Phase),1))
-  }
   MR.data.all$Phase<-factor(MR.data.all$Phase)
   row.names(MR.data.all) <- 1:nrow(MR.data.all)
-  rm(x,y,z)
+  rm(x,z)
 
-  # Measurement phase seconds (M) converted to waiting (W) or flushing (F)
+  #------------------------------------------------------------------------#
+  # Measurement phase seconds (M) converted to waiting (W) or flushing (F) #
+  #------------------------------------------------------------------------#
   if(meas.to.wait != 0){
     idx <- unlist(tapply(1:nrow(MR.data.all), MR.data.all$Phase, tail, -(meas.to.wait)), use.names=FALSE)
     MR.data.all <- MR.data.all[idx, ]
@@ -547,14 +531,12 @@ import.meas <- function(file,
     idx <- unlist(tapply(1:nrow(MR.data.all), MR.data.all$Phase, head, -(meas.to.flush)), use.names=FALSE)
     MR.data.all <- MR.data.all[idx, ]
   }else{
-    }
-    
+    } 
   row.names(MR.data.all) <- 1:nrow(MR.data.all)
   
   #----------------------------------------------#
   # Append time index for each measurement phase #
   #----------------------------------------------#
-  i = 1
   time.vector = NULL
 
   for(i in as.numeric(gsub("[M]","",levels(MR.data.all$Phase)))){
@@ -564,8 +546,7 @@ import.meas <- function(file,
   }
 
   MR.data.all$Time<-time.vector
-  rm(i)
-  rm(time.vector)
+  rm(i, time.vector)
 
   #--------------------------------------------------------------------------------------------------------------------------------------------------#
   # Restricting Dataset to Mearusements Taken in the Dark
@@ -689,32 +670,33 @@ import.meas <- function(file,
   temp.df <- subset(temp.df, (temp.df$Date.Time>start.date.time & temp.df$Date.Time<stop.date.time))
   temp.df$Phase<-factor(temp.df$Phase)
   
-  #---------------------------------------------------------------------------------#
-  # If the first or/and the last measurement phase is reduced, they will be removed #
-  #---------------------------------------------------------------------------------#
-  
-  # Head error #
-  y <- length(which(temp.df$Phase==head(levels(temp.df$Phase),1), T))
-  y <- y - 10 #some buffer in case of unexpected lags
-  z <- length(which(temp.df$Phase==tail(levels(temp.df$Phase),1), T))
-  if (z < y){
+  #-----------------------------------------#
+  # First and last measurement phase errors #
+  #-----------------------------------------#
+  # At first we calculate the mode out of all measurement phase lengths.
+  # If the length of the first or the last measurement phase is less than
+  # than 90% of the mode value, those measurement phases will be removed.
+  phase.length = NULL
+  for (i in levels(as.factor(temp.df$Phase))){
+    phase.length <- append(phase.length, length(which(temp.df$Phase == i)))
+  }
+
+  mode.phase.length <- as.numeric(names(sort(-table(phase.length)))[1])
+  first.phase.length <- length(which(temp.df$Phase==head(levels(temp.df$Phase),1), T))
+  last.phase.length <- length(which(temp.df$Phase==tail(levels(temp.df$Phase),1), T))
+
+  # check the first M
+  if (first.phase.length < mode.phase.length * 0.9){
+    temp.df<-subset(temp.df, Phase!=head(levels(temp.df$Phase),1))
+  }
+  # check the last M
+  if (last.phase.length < mode.phase.length * 0.9){
     temp.df<-subset(temp.df, Phase!=tail(levels(temp.df$Phase),1))
   }
-  temp.df$Phase<-factor(temp.df$Phase)
-  row.names(temp.df) <- 1:nrow(temp.df)
-  rm(x,y,z)
-  
-  # Tail error #
-  y <- length(which(temp.df$Phase==head(rev(levels(temp.df$Phase),1)), T))
-  y <- y - 10 #some buffer in case of unexpected lags
-  z <- length(which(temp.df$Phase==tail(rev(levels(temp.df$Phase),1)), T))
-  if (z < y){
-    temp.df<-subset(temp.df, Phase!=tail(rev(levels(temp.df$Phase),1)))
-  }
-  temp.df$Phase<-factor(temp.df$Phase)
-  row.names(temp.df) <- 1:nrow(temp.df)
-  rm(x,y,z)
+  rm(mode.phase.length, first.phase.length, last.phase.length)
 
+  temp.df$Phase<-factor(temp.df$Phase)
+  row.names(temp.df) <- 1:nrow(temp.df)
   temp.df$Total.Phases<-nlevels(temp.df$Phase) ### Why?! CHECK!!!
 
   ### PLOTTING DATA ###
