@@ -122,7 +122,7 @@ import.meas <- function(file,
 
   V1 <- V2 <- V3 <- V4 <- V5 <- V6 <- V7 <- V8 <- V9 <- V10 <- V11 <- V12 <- NULL
   V13 <- V14 <- V15 <- V16 <- V17 <- V18 <- V19 <- V20 <- V21 <- V22 <- V23 <- NULL
-  V24 <- V25 <- V26 <- V27 <- V28 <- NULL # Phase.Type <- Phase <- Start.Meas <- NULL
+  V24 <- V25 <- V26 <- V27 <- V28 <- Phase <- Phase.Type <- NULL
 
   ### AutoResp format ###
   if (logger == "AutoResp"){
@@ -514,7 +514,7 @@ import.meas <- function(file,
   MR.data.all$Phase<-x
   MR.data.all$Phase<-factor(MR.data.all$Phase)
   row.names(MR.data.all) <- 1:nrow(MR.data.all)
-  rm(x,z)
+  rm(x, z, Phase.Type)
 
   #------------------------------------------------------------------------#
   # Measurement phase seconds (M) converted to waiting (W) or flushing (F) #
@@ -613,11 +613,7 @@ import.meas <- function(file,
     meas.data<-rbind(meas.data, x.df)
     }
 
-  rm(x)
-  rm(i)
-  rm(x.df)
-  rm(x.start)
-  rm(x.end)
+  rm(x, i, x.df, x.start, x.end, Phase)
 
   #-------------------------------------------------------------------#
   # Filtering data based on start.measure and stop.measure thresholds #
