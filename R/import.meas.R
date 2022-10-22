@@ -381,7 +381,6 @@ import.meas <- function(file,
       else{
         MR.data.all$Date.Time<-strptime(as.character(MR.data.all$Date.Time), "%d/%m/%Y/ %I:%M:%S %p")
       }
-      dts<-dates(strftime(MR.data.all$Date.Time, "%d/%m/%y"), format="d/m/y")
     }
     else if(any(date.format == "MDY")){
       if(logger == "QboxAqua"){
@@ -399,7 +398,6 @@ import.meas <- function(file,
       else{
         MR.data.all$Date.Time<-strptime(as.character(MR.data.all$Date.Time), "%m/%d/%Y/ %I:%M:%S %p")
       }
-      dts<-dates(strftime(MR.data.all$Date.Time, "%m/%d/%y"), format="m/d/y")
     }
     else if(any(date.format == "YMD")){
       if(logger == "QboxAqua"){
@@ -417,7 +415,6 @@ import.meas <- function(file,
       else{
         MR.data.all$Date.Time<-strptime(as.character(MR.data.all$Date.Time), "%Y/%m/%d/ %I:%M:%S %p")
       }
-      dts<-dates(strftime(MR.data.all$Date.Time, "%y/%m/%d"), format="y/m/d")
     }
     else{
       print("Please, choose the date format: DMY, MDY or YMD, where D-day, M-month, Y-year")
@@ -440,7 +437,6 @@ import.meas <- function(file,
       else{
         MR.data.all$Date.Time<-strptime(as.character(MR.data.all$Date.Time), "%d/%m/%Y/%H:%M:%S")
       }
-      dts<-dates(strftime(MR.data.all$Date.Time, "%d/%m/%y"), format="d/m/y")
     }
     else if(any(date.format == "MDY")){
       if(logger == "QboxAqua"){
@@ -458,7 +454,6 @@ import.meas <- function(file,
       else{
         MR.data.all$Date.Time<-strptime(as.character(MR.data.all$Date.Time), "%m/%d/%Y/%H:%M:%S")
       }
-      dts<-dates(strftime(MR.data.all$Date.Time, "%m/%d/%y"), format="m/d/y")
     }
     else if(any(date.format == "YMD")){
       if(logger == "QboxAqua"){
@@ -476,7 +471,6 @@ import.meas <- function(file,
       else{
         MR.data.all$Date.Time<-strptime(as.character(MR.data.all$Date.Time), "%Y/%m/%d/%H:%M:%S")
       }
-      dts<-dates(strftime(MR.data.all$Date.Time, "%y/%m/%d"), format="y/m/d")
     }
     else{
       print("Please, choose the time format: DMY, MDY or YMD, where D-day, M-month, Y-year")
@@ -484,10 +478,34 @@ import.meas <- function(file,
   }
   rm(PM.1, PM.2, PM.3, PM.4)
 
+  #------------------------------------------------------------------#
+  # Delete time duplications and add empty lines for missing seconds #
+  #------------------------------------------------------------------#
+  MR.data.all <- MR.data.all[!duplicated(MR.data.all$Date.Time),] #dup
+  time.log <- as.POSIXct(format(seq(MR.data.all$Date.Time[1],
+                         rev(MR.data.all$Date.Time)[1], by="sec")))
+  time.log <- as.data.frame(time.log)
+  MR.data.all <- merge(MR.data.all, time.log, by.x = "Date.Time", by.y = "time.log", all = TRUE)
+  MR.data.all <- MR.data.all[!duplicated(MR.data.all$Date.Time),]
+  MR.data.all$Phase <- ave(MR.data.all$Phase, cumsum(!is.na(MR.data.all$Phase)),
+                         FUN = function(x) x[1])
+  row.names(MR.data.all) <- 1:nrow(MR.data.all)
+
   x<-strftime(MR.data.all$Date.Time, "%H:%M:%S")
   MR.data.all$Real.Time<-chron::chron(times=x)
   rm(x)
   tms<-times(strftime(MR.data.all$Date.Time, "%H:%M:%S"))
+
+  if(any(date.format == "DMY")){
+    dts<-dates(strftime(MR.data.all$Date.Time, "%d/%m/%y"), format="d/m/y")
+  }
+  if(any(date.format == "MDY")){
+    dts<-dates(strftime(MR.data.all$Date.Time, "%m/%d/%y"), format="m/d/y")
+  }
+  if(any(date.format == "YMD")){
+    dts<-dates(strftime(MR.data.all$Date.Time, "%y/%m/%d"), format="y/m/d")
+  }
+
   x<-chron::chron(dates = dts, times = tms,  format = c(dates = "yy-m-d", times = "h:m:s"))
   dts<-chron::chron(dates = dts,  format = "yy-m-d")
   MR.data.all$Date.Time<-x
