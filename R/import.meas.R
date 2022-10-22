@@ -488,8 +488,8 @@ import.meas <- function(file,
   MR.data.all$Real.Time<-chron::chron(times=x)
   rm(x)
   tms<-times(strftime(MR.data.all$Date.Time, "%H:%M:%S"))
-    x<-chron::chron(dates = dts, times = tms,  format = c(dates = "yy-m-d", times = "h:m:s"))
-    dts<-chron::chron(dates = dts,  format = "yy-m-d")
+  x<-chron::chron(dates = dts, times = tms,  format = c(dates = "yy-m-d", times = "h:m:s"))
+  dts<-chron::chron(dates = dts,  format = "yy-m-d")
   MR.data.all$Date.Time<-x
   MR.data.all$Date<-dts
   MR.data.all$Real.Time<-tms
@@ -523,15 +523,12 @@ import.meas <- function(file,
     idx <- unlist(tapply(1:nrow(MR.data.all), MR.data.all$Phase, tail, -(meas.to.wait)), use.names=FALSE)
     MR.data.all <- MR.data.all[idx, ]
     rm(idx)
-  }else{
-    }
 
   if(meas.to.flush != 0){
     idx <- unlist(tapply(1:nrow(MR.data.all), MR.data.all$Phase, head, -(meas.to.flush)), use.names=FALSE)
     MR.data.all <- MR.data.all[idx, ]
     rm(idx)
-  }else{
-    } 
+
   row.names(MR.data.all) <- 1:nrow(MR.data.all)
   
   #----------------------------------------------#
@@ -601,7 +598,7 @@ import.meas <- function(file,
                         Real.Time=chron(), Date=chron(), Time=integer(), Start.Meas=character(), End.Meas=character())
   }
   else{
-
+    print("The number of chambers must be between 1 and 8")
   }
 
   for(i in 1:length(x)){	
@@ -665,7 +662,7 @@ import.meas <- function(file,
     rm(stop.date.v.0, stop.date.v.1, stop.date.v.2)
   }
 
-  meas.data <- subset(meas.data, (meas.data$Date.Time>start.date.time & meas.data$Date.Time<stop.date.time))
+  meas.data <- subset(meas.data, (meas.data$Date.Time>=start.date.time & meas.data$Date.Time<=stop.date.time))
   meas.data$Phase<-factor(meas.data$Phase)
   rm(start.date.time, stop.date.time)
   
