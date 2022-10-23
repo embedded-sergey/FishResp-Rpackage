@@ -58,9 +58,8 @@
 #' @importFrom chron chron
 #' @importFrom grDevices dev.new
 #' @importFrom graphics abline legend par plot
-#' @importFrom stats coef lm predict.lm
+#' @importFrom stats coef lm predict.lm ave
 #' @importFrom utils head read.table tail write.table
-#'
 #' @examples
 #' # Import raw data for standard and active metabolic
 #' # rate measurements (SMR and AMR, respectively)
@@ -541,11 +540,13 @@ import.meas <- function(file,
     idx <- unlist(tapply(1:nrow(MR.data.all), MR.data.all$Phase, tail, -(meas.to.wait)), use.names=FALSE)
     MR.data.all <- MR.data.all[idx, ]
     rm(idx)
+  }
 
   if(meas.to.flush != 0){
     idx <- unlist(tapply(1:nrow(MR.data.all), MR.data.all$Phase, head, -(meas.to.flush)), use.names=FALSE)
     MR.data.all <- MR.data.all[idx, ]
     rm(idx)
+  }
 
   row.names(MR.data.all) <- 1:nrow(MR.data.all)
   
