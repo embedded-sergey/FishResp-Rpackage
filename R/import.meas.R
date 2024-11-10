@@ -712,6 +712,15 @@ import.meas <- function(file,
 
   meas.data$Phase<-factor(meas.data$Phase)
   row.names(meas.data) <- 1:nrow(meas.data)
+
+  #-----------------------------------------------#
+  # Remove measurement phases with only one value #
+  #-----------------------------------------------#
+  for(i in levels(as.factor(meas.data$Phase))){
+    meas.data <- subset(meas.data, length(which(meas.data$Phase == i)) > 1)
+  }
+  meas.data$Phase<-factor(meas.data$Phase)
+  row.names(meas.data) <- 1:nrow(meas.data)
   meas.data$Total.Phases<-nlevels(meas.data$Phase) ### Why?! CHECK!!!
 
   ### PLOTTING DATA ###
