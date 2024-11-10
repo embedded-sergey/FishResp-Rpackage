@@ -723,135 +723,39 @@ import.meas <- function(file,
   row.names(meas.data) <- 1:nrow(meas.data)
   meas.data$Total.Phases<-nlevels(meas.data$Phase) ### Why?! CHECK!!!
 
-  ### PLOTTING DATA ###
-  if (plot.temperature == T){
-    if(n.chamber == 1){
-      par(mfrow=c(1,1), ask = T)
-      plot(meas.data$Temp.1~meas.data$Date.Time, main="Chamber 1", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-    }
-    else if(n.chamber == 2){
-      par(mfrow=c(2,1), ask = T)
-      plot(meas.data$Temp.1~meas.data$Date.Time, main="Chamber 1", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.2~meas.data$Date.Time, main="Chamber 2", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-    }
-    else if(n.chamber == 3){
-      par(mfrow=c(3,1), ask = T)
-      plot(meas.data$Temp.1~meas.data$Date.Time, main="Chamber 1", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.2~meas.data$Date.Time, main="Chamber 2", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.3~meas.data$Date.Time, main="Chamber 3", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-    }
-    else if(n.chamber == 4){
-      par(mfrow=c(4,1), ask = T)
-      plot(meas.data$Temp.1~meas.data$Date.Time, main="Chamber 1", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.2~meas.data$Date.Time, main="Chamber 2", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.3~meas.data$Date.Time, main="Chamber 3", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.4~meas.data$Date.Time, main="Chamber 4", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-    }
-    else if(n.chamber == 5){
-      par(mfrow=c(4,1), ask = T)
-      plot(meas.data$Temp.1~meas.data$Date.Time, main="Chamber 1", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.2~meas.data$Date.Time, main="Chamber 2", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.3~meas.data$Date.Time, main="Chamber 3", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.4~meas.data$Date.Time, main="Chamber 4", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.5~meas.data$Date.Time, main="Chamber 5", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-    }
-    else if(n.chamber == 6){
-      par(mfrow=c(4,1), ask = T)
-      plot(meas.data$Temp.1~meas.data$Date.Time, main="Chamber 1", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.2~meas.data$Date.Time, main="Chamber 2", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.3~meas.data$Date.Time, main="Chamber 3", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.4~meas.data$Date.Time, main="Chamber 4", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.5~meas.data$Date.Time, main="Chamber 5", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.6~meas.data$Date.Time, main="Chamber 6", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-    }
-    else if(n.chamber == 7){
-      par(mfrow=c(4,1), ask = T)
-      plot(meas.data$Temp.1~meas.data$Date.Time, main="Chamber 1", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.2~meas.data$Date.Time, main="Chamber 2", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.3~meas.data$Date.Time, main="Chamber 3", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.4~meas.data$Date.Time, main="Chamber 4", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.5~meas.data$Date.Time, main="Chamber 5", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.6~meas.data$Date.Time, main="Chamber 6", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.7~meas.data$Date.Time, main="Chamber 7", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-    }
-    else if(n.chamber == 8){
-      par(mfrow=c(4,1), ask = T)
-      plot(meas.data$Temp.1~meas.data$Date.Time, main="Chamber 1", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.2~meas.data$Date.Time, main="Chamber 2", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.3~meas.data$Date.Time, main="Chamber 3", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.4~meas.data$Date.Time, main="Chamber 4", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.5~meas.data$Date.Time, main="Chamber 5", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.6~meas.data$Date.Time, main="Chamber 6", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.7~meas.data$Date.Time, main="Chamber 7", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-      plot(meas.data$Temp.8~meas.data$Date.Time, main="Chamber 8", xlab = "Date and Time", ylab = bquote("Temperature (" ~ C^o ~ ")"), col = "#0082FF", cex=0.8)
-    }
-    else{
+
+  #-------------------#
+  # Plotting raw data #
+  #-------------------#
+  if (plot.temperature == TRUE) {
+    if (n.chamber >= 1 & n.chamber <= 8) {
+      par(mfrow=c(min(n.chamber, 4), 1), ask = TRUE)
+      
+      for (i in 1:n.chamber) {
+        plot(meas.data[[paste0("Temp.", i)]] ~ meas.data$Date.Time, 
+            main = paste("Chamber", i), 
+            xlab = "Date and Time", 
+            ylab = bquote("Temperature (" ~ C^o ~ ")"), 
+            col = "#0082FF", 
+            cex = 0.8)
+      }
     }
   }
 
-  if (plot.oxygen == T){
-    if(n.chamber == 1){
-      par(mfrow=c(1,1), ask = T)
-      plot(meas.data$Ox.1~meas.data$Date.Time, main="Chamber 1", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-    }
-    else if(n.chamber == 2){
-      par(mfrow=c(2,1), ask = T)
-      plot(meas.data$Ox.1~meas.data$Date.Time, main="Chamber 1", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.2~meas.data$Date.Time, main="Chamber 2", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-    }
-    else if(n.chamber == 3){
-      par(mfrow=c(3,1), ask = T)
-      plot(meas.data$Ox.1~meas.data$Date.Time, main="Chamber 1", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.2~meas.data$Date.Time, main="Chamber 2", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.3~meas.data$Date.Time, main="Chamber 3", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-    }
-    else if(n.chamber == 4){
-      par(mfrow=c(4,1), ask = T)
-      plot(meas.data$Ox.1~meas.data$Date.Time, main="Chamber 1", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.2~meas.data$Date.Time, main="Chamber 2", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.3~meas.data$Date.Time, main="Chamber 3", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.4~meas.data$Date.Time, main="Chamber 4", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-    }
-    else if(n.chamber == 5){
-      par(mfrow=c(4,1), ask = T)
-      plot(meas.data$Ox.1~meas.data$Date.Time, main="Chamber 1", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.2~meas.data$Date.Time, main="Chamber 2", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.3~meas.data$Date.Time, main="Chamber 3", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.4~meas.data$Date.Time, main="Chamber 4", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.5~meas.data$Date.Time, main="Chamber 5", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-    }
-    else if(n.chamber == 6){
-      par(mfrow=c(4,1), ask = T)
-      plot(meas.data$Ox.1~meas.data$Date.Time, main="Chamber 1", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.2~meas.data$Date.Time, main="Chamber 2", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.3~meas.data$Date.Time, main="Chamber 3", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.4~meas.data$Date.Time, main="Chamber 4", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.5~meas.data$Date.Time, main="Chamber 5", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.6~meas.data$Date.Time, main="Chamber 6", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-    }
-    else if(n.chamber == 7){
-      par(mfrow=c(4,1), ask = T)
-      plot(meas.data$Ox.1~meas.data$Date.Time, main="Chamber 1", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.2~meas.data$Date.Time, main="Chamber 2", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.3~meas.data$Date.Time, main="Chamber 3", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.4~meas.data$Date.Time, main="Chamber 4", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.5~meas.data$Date.Time, main="Chamber 5", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.6~meas.data$Date.Time, main="Chamber 6", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.7~meas.data$Date.Time, main="Chamber 7", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-    }
-    else if(n.chamber == 8){
-      par(mfrow=c(4,1), ask = T)
-      plot(meas.data$Ox.1~meas.data$Date.Time, main="Chamber 1", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.2~meas.data$Date.Time, main="Chamber 2", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.3~meas.data$Date.Time, main="Chamber 3", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.4~meas.data$Date.Time, main="Chamber 4", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.5~meas.data$Date.Time, main="Chamber 5", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.6~meas.data$Date.Time, main="Chamber 6", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.7~meas.data$Date.Time, main="Chamber 7", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-      plot(meas.data$Ox.8~meas.data$Date.Time, main="Chamber 8", xlab = "Date and Time", ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), col = "#0082FF", cex=0.8)
-    }
-    else{
+  if (plot.oxygen == TRUE) {
+    if (n.chamber >= 1 & n.chamber <= 8) {
+      par(mfrow=c(min(n.chamber, 4), 1), ask = TRUE)
+      
+      for (i in 1:n.chamber) {
+        plot(meas.data[[paste0("Ox.", i)]] ~ meas.data$Date.Time, 
+            main = paste("Chamber", i), 
+            xlab = "Date and Time", 
+            ylab = paste("DO (", info.data$DO.unit[1], "/L)", sep = ""), 
+            col = "#0082FF", 
+            cex = 0.8)
+      }
     }
   }
+
   return(meas.data)
 }
