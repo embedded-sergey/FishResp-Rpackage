@@ -13,10 +13,9 @@ Description: Calculates metabolic rate of fish and other aquatic organisms measu
              'Q-box Aqua' ('QubitSystems'). More information about the R package 'FishResp'is
              available in the publication by Morozov et al. (2019) <doi:10.1093/conphys/coz003>.
 URL: https://fishresp.org
-Authors@R: c(
-    person("Sergey", "Morozov", role = c("aut", "cre"), email = "sergey.morozov@helsinki.fi"),
-    person("Scott", "McCairns", role = c("aut", "ths")),
-    person("Juha", "Merila", role = "ths"))
+Author: Sergey Morozov [aut, cre]
+        Scott McCairns [aut]
+        Juha Merila [ctb]
 Maintainer: Sergey Morozov <sergey.morozov@helsinki.fi>
 License: GPL-3
 SystemRequirements: Display resolution >= 1280x800; RAM >= 4GB
